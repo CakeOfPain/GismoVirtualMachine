@@ -6,7 +6,7 @@
 #include "stack.h"
 #include "operationID.h"
 
-#define INSTRUCTION_RANGE 255
+#define INSTRUCTION_RANGE 256
 
 struct virtualMachine_t;
 
