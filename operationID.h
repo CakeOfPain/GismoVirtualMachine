@@ -1,0 +1,114 @@
+#ifndef OPERATION_ID_h
+#define OPERATION_ID_h
+typedef enum
+{
+    OP_NOP,
+    OP_COMMENT,
+
+    // Load & Store
+    OP_LOAD_CONST_NUM8,
+    OP_LOAD_CONST_NUM16,
+    OP_LOAD_CONST_NUM32,
+    OP_LOAD_CONST_NUM64,
+    OP_LOAD_CONST_STACK,
+
+    OP_LOAD_FAST_NUM8,
+    OP_LOAD_FAST_NUM16,
+    OP_LOAD_FAST_NUM32,
+    OP_LOAD_FAST_NUM64,
+    OP_LOAD_FAST_STACK,
+    OP_LOAD_FAST_BORROW,
+
+    OP_STORE_FAST_NUM8,
+    OP_STORE_FAST_NUM16,
+    OP_STORE_FAST_NUM32,
+    OP_STORE_FAST_NUM64,
+    OP_STORE_FAST_STACK,
+    OP_STORE_FAST_BORROW,
+
+    // Arithmetic
+    OP_ADD_I,
+    OP_ADD_F,
+    
+    OP_SUB_I,
+    OP_SUB_F,
+
+    OP_MUL_I,
+    OP_MUL_F,
+
+    OP_DIV_I,
+    OP_DIV_F,
+
+    OP_MOD_I,
+
+    OP_AND,
+    OP_OR,
+    OP_NOT,
+    OP_BWAND,
+    OP_BWOR,
+    OP_BWNOT,
+
+    OP_CMP,
+
+    // Stack Operations
+    OP_POP,
+    OP_POP_RELEASE,
+    OP_SWAP,
+    OP_ROT,
+
+    OP_STACK_POP,
+    OP_STACK_PUSH,
+    OP_STACK_SWAP,
+    OP_STACK_ROT,
+
+    OP_STACK_LOAD_NUM8,
+    OP_STACK_LOAD_NUM16,
+    OP_STACK_LOAD_NUM32,
+    OP_STACK_LOAD_NUM64,
+    OP_STACK_LOAD_STACK,
+    
+    OP_STACK_STORE_NUM8,
+    OP_STACK_STORE_NUM16,
+    OP_STACK_STORE_NUM32,
+    OP_STACK_STORE_NUM64,
+    OP_STACK_STORE_STACK,
+
+    OP_STACK_ALLOCATE_BYTES,
+
+    // Borrow
+    OP_BORROW,
+    OP_RETURNBORROW,
+
+    // Functions
+    OP_RETURN,
+    OP_YIELD,
+    OP_CALL,
+    OP_CALL_PARALLEL,
+
+    // Controll Flow
+    OP_JUMP_ABS,
+    OP_JUMP_NEG,
+    OP_JUMP_POS,
+    OP_JUMP_ABS_TRUE,
+    OP_JUMP_ABS_FALSE,
+    OP_JUMP_NEG_TRUE,
+    OP_JUMP_NEG_FALSE,
+    OP_JUMP_POS_TRUE,
+    OP_JUMP_POS_FALSE,
+
+    // Channels
+    OP_CHANNEL_READ,
+    OP_CHANNEL_CLOSE,
+    OP_CHANNEL_RECEIVE,
+    OP_CHANNEL_SEND,
+
+    // Convertions
+    OP_I2U,
+    OP_I2F,
+    OP_U2I,
+    OP_U2F,
+    OP_F2I,
+    OP_F2U,
+} operationID_t;
+
+#endif
