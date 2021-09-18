@@ -36,7 +36,7 @@ static void OPERATION_COMMENT(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_CONST_NUM8(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint8(vm->callstack, STACK_POINTER_TO(vm->constants->data, index, uint8_t));
 }
 
@@ -45,7 +45,7 @@ static void OPERATION_LOAD_CONST_NUM8(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_CONST_NUM16(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint16(vm->callstack, STACK_POINTER_TO(vm->constants->data, index, uint16_t));
 }
 
@@ -54,7 +54,7 @@ static void OPERATION_LOAD_CONST_NUM16(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_CONST_NUM32(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint32(vm->callstack, STACK_POINTER_TO(vm->constants->data, index, uint32_t));
 }
 
@@ -63,7 +63,7 @@ static void OPERATION_LOAD_CONST_NUM32(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_CONST_NUM64(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint64(vm->callstack, STACK_POINTER_TO(vm->constants->data, index, uint64_t));
 }
 
@@ -72,7 +72,7 @@ static void OPERATION_LOAD_CONST_NUM64(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_CONST_STACK(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_ptr(vm->callstack, STACK_POINTER_TO(vm->constants->data, index, byteStack_t*));
 }
 
@@ -81,7 +81,7 @@ static void OPERATION_LOAD_CONST_STACK(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_FAST_NUM8(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint8(vm->callstack, STACK_POINTER_TO(vm->variables, index, uint8_t));
 }
 
@@ -90,7 +90,7 @@ static void OPERATION_LOAD_FAST_NUM8(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_FAST_NUM16(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint16(vm->callstack, STACK_POINTER_TO(vm->variables, index, uint16_t));
 }
 
@@ -99,7 +99,7 @@ static void OPERATION_LOAD_FAST_NUM16(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_FAST_NUM32(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint32(vm->callstack, STACK_POINTER_TO(vm->variables, index, uint32_t));
 }
 
@@ -108,7 +108,7 @@ static void OPERATION_LOAD_FAST_NUM32(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_FAST_NUM64(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_uint64(vm->callstack, STACK_POINTER_TO(vm->variables, index, uint64_t));
 }
 
@@ -117,7 +117,7 @@ static void OPERATION_LOAD_FAST_NUM64(virtualMachine_t *vm)
  */
 static void OPERATION_LOAD_FAST_STACK(virtualMachine_t *vm)
 {
-    uint64_t index = ByteStack_pop_uint64(vm->operations);
+    uint64_t index = ByteStack_pop_uint64(vm->opstack);
     ByteStack_push_ptr(vm->callstack, STACK_POINTER_TO(vm->variables, index, byteStack_t*));
 }
 
