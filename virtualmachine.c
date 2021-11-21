@@ -12,11 +12,12 @@ virtualMachine_t* VirtualMachine()
         fprintf(stderr, "%s - at: %d:%s\n", "Out of Memory!", __LINE__, __FILE__);
         exit(EXIT_FAILURE);
     }
-    // Initzalisation
-    vm->callstack = ByteStack(STD_STACK_SIZE);
-    vm->variables = ByteStack(STD_STACK_SIZE);
-    vm->constants = ByteStack(STD_STACK_SIZE);
-    vm->opstack   = ByteStack(STD_STACK_SIZE);
+
+    // Initalisation of stacks
+    vm->callstack      = ByteStack(STD_STACK_SIZE);
+    vm->programstack   = ByteStack(STD_STACK_SIZE);
+    vm->ownershipstack = ByteStack(STD_STACK_SIZE);
+    vm->opstack        = ByteStack(STD_STACK_SIZE);
     
     vm->operations = Operations_getSTDOperationImplementation();
     return vm;
@@ -31,8 +32,8 @@ virtualMachine_t* VirtualMachine_delete(virtualMachine_t *vm)
     }
 
     ByteStack_delete(vm->callstack);
-    ByteStack_delete(vm->variables);
-    ByteStack_delete(vm->constants);
+    ByteStack_delete(vm->programstack);
+    ByteStack_delete(vm->ownershipstack);
     ByteStack_delete(vm->opstack);
     free(vm);
     return NULL;

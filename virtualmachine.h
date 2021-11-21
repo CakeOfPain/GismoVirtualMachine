@@ -13,8 +13,8 @@ struct virtualMachine_t;
 typedef struct virtualMachine_t
 {
     byteStack_t *callstack;
-    byteStack_t *variables;
-    byteStack_t *constants;
+    byteStack_t *programstack;
+    byteStack_t *ownershipstack;
     byteStack_t *opstack;
     void (**operations)(struct virtualMachine_t*);
 } virtualMachine_t;

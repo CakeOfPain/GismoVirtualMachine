@@ -3,7 +3,7 @@
 typedef enum
 {
     OP_NOP,
-    OP_COMMENT,
+    OP_HINT,
 
     // Load & Store
     OP_LOAD_CONST_NUM8,
