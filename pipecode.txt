@@ -1,0 +1,23 @@
+
+define someData(256);
+
+actor add<generic>(input, output) => ([input] -> generic + [input] -> generic) -> generic -> [output];
+actor sub<generic>(input, output) => ([input] -> generic - [input] -> generic) -> generic -> [output];
+actor mul<generic>(input, output) => ([input] -> generic * [input] -> generic) -> generic -> [output];
+actor div<generic>(input, output) => ([input] -> generic / [input] -> generic) -> generic -> [output];
+actor mod<generic>(input, output) => ([input] -> generic % [input] -> generic) -> generic -> [output];
+
+
+execute => [someData] -> i64 -> [add<i64>.input];
+
+execute => [stack] -> i32 ~> f32 -> [stack];
+execute => [stack] ~> i32 -> f32 -> [stack];
+execute => [stack] *> i32 -> [stdio];
+execute => [stack] #> i32 -> [stdio];
+execute => 0 .. 10 *> i32 -> [stdio];
+
+->      POP/PUSH/TYPE CONVERSATION
+~>      PEEK/IMPLICIT CONVERSATION
+
+*>      POP ALL
+#>      MAP

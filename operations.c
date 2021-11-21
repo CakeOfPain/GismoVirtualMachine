@@ -1,8 +1,8 @@
 
 #include "operations.h"
 
-// Legacy:
-// () =>        Function Declaration
+// Stack Pipe Language:
+// <name> () =>    Function Declaration
 // [..]         Reference to a Stack 
 // (..)[..]     Access to a Position in a Stack
 // <-           Pop Value
