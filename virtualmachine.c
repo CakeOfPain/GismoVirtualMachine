@@ -18,6 +18,7 @@ virtualMachine_t* VirtualMachine()
     vm->programstack   = ByteStack(STD_STACK_SIZE);
     vm->ownershipstack = ByteStack(STD_STACK_SIZE);
     vm->opstack        = ByteStack(STD_STACK_SIZE);
+    vm->partionstack   = ByteStack(STD_STACK_SIZE);
     
     vm->operations = Operations_getSTDOperationImplementation();
     return vm;
@@ -35,6 +36,7 @@ virtualMachine_t* VirtualMachine_delete(virtualMachine_t *vm)
     ByteStack_delete(vm->programstack);
     ByteStack_delete(vm->ownershipstack);
     ByteStack_delete(vm->opstack);
+    ByteStack_delete(vm->partionstack);
     free(vm);
     return NULL;
 }

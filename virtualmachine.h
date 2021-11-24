@@ -14,6 +14,7 @@ typedef struct virtualMachine_t
 {
     byteStack_t *callstack;
     byteStack_t *programstack;
+    byteStack_t *partionstack;
     byteStack_t *ownershipstack;
     byteStack_t *opstack;
     void (**operations)(struct virtualMachine_t*);
