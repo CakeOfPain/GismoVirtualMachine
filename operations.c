@@ -2,12 +2,12 @@
 #include "operations.h"
 
 // Stack Pipe Language:
-// <name> () =>    Function Declaration
-// [..]         Reference to a Stack 
-// (..)[..]     Access to a Position in a Stack
-// <-           Pop Value
-// ->           Push Top Value
-// =            Assignment
+// [<name>]         Reference to a Stack 
+// [<name>](..)     Access to a Position in a Stack
+// -> <type>/stack  Push Or POP Top Value
+// ~> <type>/stack  Peek
+// Range(..)
+// <type>: <name>   Reference in code
 
 // Operations:
 
@@ -20,7 +20,7 @@ static void OPERATION_NOP(virtualMachine_t *vm)
 }
 
 /**
- * @brief Does nothing, jumps over some bytes
+ * @brief Range([opstack] -> u16) -> u16: [opstack] -> u8
  */
 static void OPERATION_HINT(virtualMachine_t *vm)
 {
@@ -31,6 +31,55 @@ static void OPERATION_HINT(virtualMachine_t *vm)
     }
 }
 
+/*
+ * @brief [programstack]([opstack] -> u32: index) -> u8: element -> [programstack]
+ */
+static void OPERATION_LOAD_ABS_N8(virtualMachine_t *vm)
+{
+    const uint32_t index = ByteStack_pop_uint32(vm->opstack);
+    const uint8_t element = STACK_POINTER_TO(vm->programstack->data, index, uint8_t);
+    ByteStack_push_uint8(vm->programstack, element);
+}
+
+/*
+ * @brief [programstack]([opstack] -> u32: index) -> u16: element -> [programstack]
+ */
+static void OPERATION_LOAD_ABS_N16(virtualMachine_t *vm)
+{
+    const uint32_t index = ByteStack_pop_uint32(vm->opstack);
+    const uint16_t element = STACK_POINTER_TO(vm->programstack->data, index, uint16_t);
+    ByteStack_push_uint16(vm->programstack, element);
+}
+
+/*
+ * @brief [programstack]([opstack] -> u32: index) -> u32: element -> [programstack]
+ */
+static void OPERATION_LOAD_ABS_N32(virtualMachine_t *vm)
+{
+    const uint32_t index = ByteStack_pop_uint32(vm->opstack);
+    const uint32_t element = STACK_POINTER_TO(vm->programstack->data, index, uint32_t);
+    ByteStack_push_uint32(vm->programstack, element);
+}
+
+/*
+ * @brief [programstack]([opstack] -> u32: index) -> u64: element -> [programstack]
+ */
+static void OPERATION_LOAD_ABS_N64(virtualMachine_t *vm)
+{
+    const uint32_t index = ByteStack_pop_uint32(vm->opstack);
+    const uint64_t element = STACK_POINTER_TO(vm->programstack->data, index, uint64_t);
+    ByteStack_push_uint64(vm->programstack, element);
+}
+
+/*
+ * @brief [programstack]([opstack] -> u32: index) -> ptr: element -> [programstack]
+ */
+static void OPERATION_LOAD_ABS_CMPLX(virtualMachine_t *vm)
+{
+    const uint32_t index = ByteStack_pop_uint32(vm->opstack);
+    const void* element = STACK_POINTER_TO(vm->programstack->data, index, void*);
+    ByteStack_push_ptr(vm->programstack, element);
+}
 
 
 
@@ -40,11 +89,11 @@ static const OperationPTR operations[INSTRUCTION_RANGE] =
     [OP_HINT]            = OPERATION_HINT,
     
     // Load & Store
-    [OP_LOAD_ABS_N8]     = OPERATION_NOP,
-    [OP_LOAD_ABS_N16]    = OPERATION_NOP,
-    [OP_LOAD_ABS_N32]    = OPERATION_NOP,
-    [OP_LOAD_ABS_N64]    = OPERATION_NOP,
-    [OP_LOAD_ABS_CMPLX]  = OPERATION_NOP,
+    [OP_LOAD_ABS_N8]     = OPERATION_LOAD_ABS_N8,
+    [OP_LOAD_ABS_N16]    = OPERATION_LOAD_ABS_N16,
+    [OP_LOAD_ABS_N32]    = OPERATION_LOAD_ABS_N32,
+    [OP_LOAD_ABS_N64]    = OPERATION_LOAD_ABS_N64,
+    [OP_LOAD_ABS_CMPLX]  = OPERATION_LOAD_ABS_CMPLX,
     
     [OP_LOAD_LOC_N8]     = OPERATION_NOP,
     [OP_LOAD_LOC_N16]    = OPERATION_NOP,
