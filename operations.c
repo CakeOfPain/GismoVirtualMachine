@@ -77,13 +77,13 @@ static void OPERATION_LOAD_ABS_N64(virtualMachine_t *vm)
 static void OPERATION_LOAD_ABS_CMPLX(virtualMachine_t *vm)
 {
     const uint32_t index = ByteStack_pop_uint32(vm->opstack);
-    const void* element = STACK_POINTER_TO(vm->programstack->data, index, void*);
+    void* element = STACK_POINTER_TO(vm->programstack->data, index, void*);
     ByteStack_push_ptr(vm->programstack, element);
 }
 
 
 
-static const OperationPTR operations[INSTRUCTION_RANGE] =
+static OperationPTR operations[INSTRUCTION_RANGE] =
 {
     [OP_NOP]             = OPERATION_NOP,
     [OP_HINT]            = OPERATION_HINT,
@@ -135,7 +135,6 @@ static const OperationPTR operations[INSTRUCTION_RANGE] =
     [OP_INC_I]           = OPERATION_NOP,
     [OP_INC_F]           = OPERATION_NOP,
 
-    [OP_DEC_I]           = OPERATION_NOP,
     [OP_DEC_I]           = OPERATION_NOP,
 
     [OP_AND]             = OPERATION_NOP,
@@ -221,7 +220,7 @@ static const OperationPTR operations[INSTRUCTION_RANGE] =
     [OP_RESIZE_N64] = OPERATION_NOP
 };
 
-const OperationPTR* Operations_getSTDOperationImplementation()
+OperationPTR* Operations_getSTDOperationImplementation()
 {
     return operations;
 }
